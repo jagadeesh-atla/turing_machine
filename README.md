@@ -40,8 +40,8 @@ TAPE
 TRANSITIONS
 ;; <current state> <current symbol> <new symbol> <direction> <new state>
 ;; <direction> : > | < | = ;; means right, left or stay
-;; '_' can be used as a wildcard in <current symbol> or <current state> to match any character or state.
-;; '_' can be used in <new symbol> or <new state> to mean 'no change'.
+;; '*' can be used as a wildcard in <current symbol> or <current state> to match any character or state.
+;; '*' can be used in <new symbol> or <new state> to mean 'no change'.
 
 ```
 
@@ -58,10 +58,10 @@ Inc Halt
 
 SYMBOLS
 0 1
-\_
+_
 
 BLANK
-\_
+_
 
 INITIAL STATE
 Inc
