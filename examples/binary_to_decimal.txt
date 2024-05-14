@@ -1,0 +1,58 @@
+;; Converts a number from binary to decimal.
+;; It does this by successively incrementing the decimal counter and decrementing the binary input until 0 is reached.
+;; Input: A single number in binary.
+
+STATES
+0 
+1 1a 1b 
+2 3 4 
+20 21 21a
+halt
+
+FINAL STATES
+halt
+
+INITIAL STATE
+0
+
+SYMBOLS
+0 1 2 3 4 5 6 7 8 9 _
+
+BLANK
+_
+
+TAPE
+10110
+
+TRANSITIONS
+0 * * = 1
+1 _ _ > 1
+1 * * > 1a
+1a _ _ < 2   ;; found the end of the input
+1a * * > 1a
+1b _ _ > 1   ;; (used later) skip the output, go to end of input
+1b * * > 1b
+2 1 0 < 3    ;; decrement input
+2 0 1 < 2    ;; decrement & carry
+2 _ _ > 20   ;; finished. clean up
+3 _ _ < 4    ;; found end of input
+3 * * < 3    ;; find start of output
+4 0 1 > 1b   ;; increment the output
+4 1 2 > 1b
+4 2 3 > 1b
+4 3 4 > 1b
+4 4 5 > 1b
+4 5 6 > 1b
+4 6 7 > 1b
+4 7 8 > 1b
+4 8 9 > 1b
+4 9 0 < 4  ;; increment & carry
+4 _ 1 > 1b  ;; start new column
+
+;; clean up
+20 _ _ < 21  ;; return to end of output
+20 * _ > 20  ;; erase input
+21 _ _ < 21
+21 * * < 21a
+21a _ _ > halt
+21a * * < 21a

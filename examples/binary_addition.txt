@@ -1,0 +1,56 @@
+;; Binary addition - adds two binary numbers
+;; Input: two binary numbers, separated by a single space, eg '100_1110'
+
+STATES
+0 1 2 
+3x 3y
+4x 4y
+5 6 7 
+halt
+
+SYMBOLS
+0 1 x y & _
+
+BLANK
+&
+
+INITIAL STATE
+0
+
+FINAL STATES
+halt
+
+TAPE
+110110_101011
+
+TRANSITIONS
+0 _ _ > 1
+0 * * > 0
+1 _ _ < 2
+1 * * > 1
+2 0 _ < 3x
+2 1 _ < 3y
+2 _ _ < 7
+3x _ _ < 4x
+3x * * < 3x
+3y _ _ < 4y
+3y * * < 3y
+4x 0 x > 0
+4x 1 y > 0
+4x _ x > 0
+4x * * < 4x    ;; skip the x/y's
+4y 0 1 = 5
+4y 1 0 < 4y
+4y _ 1 = 5
+4y * * < 4y    ;; skip the x/y's
+5 x x < 6
+5 y y < 6
+5 _ _ < 6
+5 * * > 5
+6 0 x > 0
+6 1 y > 0
+
+7 x 0 < 7
+7 y 1 < 7
+7 _ _ > halt
+7 * * < 7

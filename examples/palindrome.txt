@@ -1,0 +1,61 @@
+;; This example program checks if the input string is a binary palindrome.
+;; Input: a string of 0's and 1's, eg '1001001'
+
+STATES
+0
+1o 1i
+2o 2i
+3 4 
+accept accept2
+reject reject2
+halt-accept halt-reject
+
+SYMBOLS
+0 1 _ : ( )
+
+BLANK
+_
+
+INITIAL STATE
+0
+
+FINAL STATES
+halt-accept halt-reject
+
+TAPE
+1001001
+
+TRANSITIONS
+;; State 0: read the leftmost symbol
+0 0 _ > 1o
+0 1 _ > 1i
+0 _ _ = accept     ;; Empty input
+
+;; State 1o, 1i: find the rightmost symbol
+1o _ _ < 2o
+1o * * > 1o
+
+1i _ _ < 2i
+1i * * > 1i
+
+;; State 2o, 2i: check if the rightmost symbol matches the most recently read left-hand symbol
+2o 0 _ < 3
+2o _ _ = accept
+2o * * = reject
+
+2i 1 _ < 3
+2i _ _ = accept
+2i * * = reject
+
+;; State 3, 4: return to left end of remaining input
+3 _ _ = accept
+3 * * < 4
+4 _ _ > 0  ;; Back to the beginning
+4 * * < 4
+
+accept * : > accept2
+accept2 * ) = halt-accept
+
+reject _ : > reject2
+reject * _ < reject
+reject2 * ( = halt-reject

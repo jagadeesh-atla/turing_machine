@@ -1,0 +1,25 @@
+;; This example decreases the binary number by 1 read from left to right
+;; 111 (7) -> 011 (6)
+
+STATES
+Dec Halt
+
+SYMBOLS
+0 1
+_
+
+BLANK
+_
+
+INITIAL STATE
+Dec
+
+FINAL STATES
+Halt
+
+TAPE
+110110
+
+TRANSITIONS
+Dec 1 0 > Halt
+Dec 0 1 > Dec

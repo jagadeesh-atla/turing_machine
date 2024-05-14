@@ -1,0 +1,25 @@
+;; This example increases the binary number by 1 read from left to right
+;; 011 (6) -> 111 (7)
+
+STATES
+Inc Halt
+
+SYMBOLS
+0 1
+_
+
+BLANK
+_
+
+INITIAL STATE
+Inc
+
+FINAL STATES
+Halt
+
+TAPE
+110110
+
+TRANSITIONS
+Inc 0 1 > Halt
+Inc 1 0 > Inc
