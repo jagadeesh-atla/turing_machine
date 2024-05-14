@@ -42,7 +42,7 @@ TRANSITIONS
 ;; <direction> : > | < | = ;; means right, left or stay
 ;; '*' can be used as a wildcard in <current symbol> or <current state> to match any character or state.
 ;; '*' can be used in <new symbol> or <new state> to mean 'no change'.
-
+;; Note: Make sure wildcards should be at last for particular state, because it may alter desired output.
 ```
 
 ## Example
